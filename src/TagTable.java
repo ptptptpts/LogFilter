@@ -1,19 +1,8 @@
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import javax.swing.*;
+import javax.swing.table.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JCheckBox;
-import javax.swing.JTable;
-import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 public class TagTable extends JTable
 {
@@ -84,17 +73,12 @@ public class TagTable extends JTable
 
     public boolean isCellEditable(int row, int column)
     {
-        if(column == LogFilterTableModel.COMUMN_BOOKMARK)
-            return true;
-        return false;
+        return column == LogFilterTableModel.COMUMN_BOOKMARK;
     }
 
     boolean isInnerRect(Rectangle parent, Rectangle child)
     {
-        if(parent.y <= child.y && (parent.y + parent.height) >= (child.y + child.height))
-            return true;
-        else
-            return false;
+        return parent.y <= child.y && (parent.y + parent.height) >= (child.y + child.height);
     }
 
     int getVisibleRowCount()

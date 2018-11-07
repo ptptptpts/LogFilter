@@ -18,14 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.LineNumberReader;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 /**
  * A menu used to store and display recently used files.
@@ -37,7 +36,7 @@ public abstract class RecentFileMenu extends JMenu{
 	private int itemCount; //how many items in the menu
 	private String[] recentEntries; //the recent file entries
 	private final static String defaultText="__R_e_C_e_N_t__:_?"; //colon & question mark are not allowed as a file name in any OS that I'm aware of
-	
+
 	/**
 	 * Create a new instance of RecentFileMenu.
 	 * @param name The name of this menu, not displayed but used to store the list of recently used file names.
@@ -72,12 +71,12 @@ public abstract class RecentFileMenu extends JMenu{
 				}
 			} catch(Exception x){
 				x.printStackTrace();
-			}		
-		} else{ //disable
+			}
+		} else { //disable
 			this.setEnabled(false);
 		}
 	}
-	
+
 	/**
 	 * Adds a new entry to the menu. Moves everything "down" one row.
 	 * @param filePath The new path to add.
@@ -92,8 +91,8 @@ public abstract class RecentFileMenu extends JMenu{
 	 * @param updateFile Whether to update the saved file, only false when called from constructor.
 	 */
 	private void addEntry(String filePath,boolean updateFile){
-		//check if this is disabled 
-		if(!this.isEnabled()){
+		//check if this is disabled
+		if (!this.isEnabled()) {
 			this.setEnabled(true);
 		}
 		//clear the existing items
@@ -146,7 +145,7 @@ public abstract class RecentFileMenu extends JMenu{
 			}
 		}
 	}
-		
+
 	/**
 	 * Event that fires when a recent file is selected from the menu. Override this when implementing.
 	 * @param filePath The file that was selected.

@@ -1,12 +1,12 @@
-import java.awt.Color;
+import java.awt.*;
 import java.util.StringTokenizer;
 
 /**
- * 
+ *
  */
 
 /**
- * 
+ *
  */
 public class LogCatParser implements ILogParser
 {
@@ -16,11 +16,11 @@ public class LogCatParser implements ILogParser
     final String TOKEN       = "/()";
     final String TOKEN_PID   = "/() ";
     final String TOKEN_MESSAGE = "'";
-    
+
     public Color getColor(LogInfo logInfo)
     {
         if(logInfo.m_strLogLV == null) return Color.BLACK;
-        
+
         if(logInfo.m_strLogLV.equals("FATAL") || logInfo.m_strLogLV.equals("F"))
             return new Color(LogColor.COLOR_FATAL);
         if(logInfo.m_strLogLV.equals("ERROR") || logInfo.m_strLogLV.equals("E") || logInfo.m_strLogLV.equals("3"))
@@ -46,7 +46,7 @@ public class LogCatParser implements ILogParser
     public int getLogLV(LogInfo logInfo)
     {
         if(logInfo.m_strLogLV == null) return LogInfo.LOG_LV_VERBOSE;
-        
+
         if(logInfo.m_strLogLV.equals("FATAL") || logInfo.m_strLogLV.equals("F"))
             return LogInfo.LOG_LV_FATAL;
         if(logInfo.m_strLogLV.equals("ERROR") || logInfo.m_strLogLV.equals("E"))
@@ -60,64 +60,55 @@ public class LogCatParser implements ILogParser
         else
             return LogInfo.LOG_LV_VERBOSE;
     }
-    
+
 //04-17 09:01:18.910 D/LightsService(  139): BKL : 106
     public boolean isNormal(String strText)
     {
         if(strText.length() < 22) return false;
 
-        String strLevel = (String)strText.substring(19, 21);
-        if(strLevel.equals("D/")
+        String strLevel = strText.substring(19, 21);
+        return strLevel.equals("D/")
                 || strLevel.equals("V/")
                 || strLevel.equals("I/")
                 || strLevel.equals("W/")
                 || strLevel.equals("E/")
-                || strLevel.equals("F/")
-                )
-            return true;
-        return false;
+                || strLevel.equals("F/");
     }
 
-//04-20 12:06:02.125   146   179 D BatteryService: update start    
+    //04-20 12:06:02.125   146   179 D BatteryService: update start
     public boolean isThreadTime(String strText)
     {
         if(strText.length() < 34) return false;
 
-        String strLevel = (String)strText.substring(31, 33);
-        if(strLevel.equals("D ")
+        String strLevel = strText.substring(31, 33);
+        return strLevel.equals("D ")
                 || strLevel.equals("V ")
                 || strLevel.equals("I ")
                 || strLevel.equals("W ")
                 || strLevel.equals("E ")
-                || strLevel.equals("F ")
-                )
-            return true;
-        return false;
+                || strLevel.equals("F ");
     }
-    
-//    <4>[19553.494855] [DEBUG] USB_SEL(1) HIGH set USB mode 
+
+    //    <4>[19553.494855] [DEBUG] USB_SEL(1) HIGH set USB mode
     public boolean isKernel(String strText)
     {
         if(strText.length() < 18) return false;
 
-        String strLevel = (String)strText.substring(1, 2);
-        if(strLevel.equals("0")
+        String strLevel = strText.substring(1, 2);
+        return strLevel.equals("0")
                 || strLevel.equals("1")
                 || strLevel.equals("2")
                 || strLevel.equals("3")
                 || strLevel.equals("4")
                 || strLevel.equals("5")
                 || strLevel.equals("6")
-                || strLevel.equals("7")
-                )
-            return true;
-        return false;
+                || strLevel.equals("7");
     }
-    
+
     public LogInfo getNormal(String strText)
     {
         LogInfo logInfo = new LogInfo();
-        
+
         StringTokenizer stk = new StringTokenizer(strText, TOKEN_PID, false);
         if(stk.hasMoreElements())
             logInfo.m_strDate = stk.nextToken();
@@ -145,7 +136,7 @@ public class LogCatParser implements ILogParser
     public LogInfo getThreadTime(String strText)
     {
         LogInfo logInfo = new LogInfo();
-        
+
         StringTokenizer stk = new StringTokenizer(strText, TOKEN_SPACE, false);
         if(stk.hasMoreElements())
             logInfo.m_strDate = stk.nextToken();
@@ -175,7 +166,7 @@ public class LogCatParser implements ILogParser
     public LogInfo getKernel(String strText)
     {
         LogInfo logInfo = new LogInfo();
-        
+
         StringTokenizer stk = new StringTokenizer(strText, TOKEN_KERNEL, false);
         if(stk.hasMoreElements())
             logInfo.m_strLogLV = stk.nextToken();

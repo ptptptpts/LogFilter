@@ -1,4 +1,4 @@
-import java.awt.Color;
+import java.awt.*;
 
 public class LogInfo
 {
@@ -10,7 +10,7 @@ public class LogInfo
     public static final int LOG_LV_FATAL    = LOG_LV_ERROR << 1;
     public static final int LOG_LV_ALL      = LOG_LV_VERBOSE | LOG_LV_DEBUG | LOG_LV_INFO
                                               | LOG_LV_WARN | LOG_LV_ERROR | LOG_LV_FATAL;
-    
+
     boolean                 m_bMarked;
     String                  m_strBookmark   = "";
     String                  m_strDate       = "";
@@ -22,7 +22,7 @@ public class LogInfo
     String                  m_strTag        = "";
     String                  m_strMessage    = "";
     Color                   m_TextColor;
-    
+
     public void display()
     {
         T.d("=============================================");
@@ -38,7 +38,7 @@ public class LogInfo
         T.d("m_strMessage   = " + m_strMessage);
         T.d("=============================================");
     }
-    
+
     public Object getData(int nColumn)
     {
         switch(nColumn)

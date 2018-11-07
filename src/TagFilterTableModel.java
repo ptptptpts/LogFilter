@@ -1,6 +1,5 @@
-import java.util.ArrayList;
-
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class TagFilterTableModel extends AbstractTableModel
 {

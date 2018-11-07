@@ -1,19 +1,21 @@
-import java.awt.Color;
+import java.awt.*;
 
 /**
- * 
+ *
  */
 
 
 /**
- * 
+ *
  */
 public interface ILogParser
 {
-    public static final int TYPE_ANDROID_DDMS   = 0;
-    public static final int TYPE_ANDROID_LOGCAT = 1;
-    
-    public LogInfo parseLog(String strText);
-    public Color   getColor(LogInfo logInfo);
-    public int     getLogLV(LogInfo logInfo);
+    int TYPE_ANDROID_DDMS = 0;
+    int TYPE_ANDROID_LOGCAT = 1;
+
+    LogInfo parseLog(String strText);
+
+    Color getColor(LogInfo logInfo);
+
+    int getLogLV(LogInfo logInfo);
 }

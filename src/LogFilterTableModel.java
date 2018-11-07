@@ -1,7 +1,5 @@
-import java.io.ObjectInputStream.GetField;
-import java.util.ArrayList;
-
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class LogFilterTableModel extends AbstractTableModel
 {
@@ -21,7 +19,7 @@ public class LogFilterTableModel extends AbstractTableModel
     public static String  ColName[]     = { "Line", "Date", "Time", "LogLV", "Pid", "Thread", "Tag", "Bookmark", "Message" };
     public static int     ColWidth[]    = { 50,     50,     100,    20,      50,    50,       100,   100,        600};
     public static int     DEFULT_WIDTH[]= { 50,     50,     100,    20,      50,    50,       100,   100,        600};
-    
+
     ArrayList<LogInfo> m_arData;
 
     public static void setColumnWidth(int nColumn, int nWidth)
@@ -47,16 +45,16 @@ public class LogFilterTableModel extends AbstractTableModel
     public String getColumnName(int col) {
         return ColName[col];
     }
-    
+
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         return m_arData.get(rowIndex).getData(columnIndex);
     }
-    
+
     public LogInfo getRow(int row) {
         return m_arData.get(row);
     }
-    
+
     public void setData(ArrayList<LogInfo> arData)
     {
         m_arData = arData;

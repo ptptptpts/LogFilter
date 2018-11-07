@@ -1,32 +1,10 @@
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+import javax.swing.*;
+import javax.swing.table.*;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.StringTokenizer;
-
-import javax.swing.JComponent;
-import javax.swing.JTable;
-import javax.swing.JViewport;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 public class LogTable extends JTable implements FocusListener, ActionListener
 {
@@ -125,12 +103,12 @@ public class LogTable extends JTable implements FocusListener, ActionListener
                         if(colum == LogFilterTableModel.COMUMN_TAG)
                         {
                             LogInfo logInfo = ((LogFilterTableModel)getModel()).getRow(row);
-                            if(m_strTagShow.contains("|" + (String)logInfo.getData(colum)))
-                                m_strTagShow = m_strTagShow.replace("|" + (String)logInfo.getData(colum), "");
+                            if (m_strTagShow.contains("|" + logInfo.getData(colum)))
+                                m_strTagShow = m_strTagShow.replace("|" + logInfo.getData(colum), "");
                             else if(m_strTagShow.contains((String)logInfo.getData(colum)))
                                 m_strTagShow = m_strTagShow.replace((String)logInfo.getData(colum), "");
                             else
-                                m_strTagShow += "|" + (String)logInfo.getData(colum);
+                                m_strTagShow += "|" + logInfo.getData(colum);
                             m_LogFilterMain.notiEvent(new INotiEvent.EventParam(INotiEvent.EVENT_CHANGE_FILTER_SHOW_TAG));
                         }
                     }
@@ -145,7 +123,7 @@ public class LogTable extends JTable implements FocusListener, ActionListener
                         {
                             T.d();
                             LogInfo logInfo = ((LogFilterTableModel)getModel()).getRow(row);
-                            m_strTagRemove += "|" + (String)logInfo.getData(colum);
+                            m_strTagRemove += "|" + logInfo.getData(colum);
                             m_LogFilterMain.notiEvent(new INotiEvent.EventParam(INotiEvent.EVENT_CHANGE_FILTER_REMOVE_TAG));
                         }
                     }
@@ -166,17 +144,12 @@ public class LogTable extends JTable implements FocusListener, ActionListener
 
     public boolean isCellEditable(int row, int column)
     {
-        if(column == LogFilterTableModel.COMUMN_BOOKMARK)
-            return true;
-        return false;
+        return column == LogFilterTableModel.COMUMN_BOOKMARK;
     }
 
     boolean isInnerRect(Rectangle parent, Rectangle child)
     {
-        if(parent.y <= child.y && (parent.y + parent.height) >= (child.y + child.height))
-            return true;
-        else
-            return false;
+        return parent.y <= child.y && (parent.y + parent.height) >= (child.y + child.height);
     }
 
     String GetFilterFind()
@@ -362,7 +335,7 @@ public class LogTable extends JTable implements FocusListener, ActionListener
 //            this, col.getHeaderValue(), false, false, 0, 0);
 //        width = comp.getPreferredSize().width;
 
-        JViewport viewport = (JViewport)m_LogFilterMain.m_scrollVBar.getViewport();
+        JViewport viewport = m_LogFilterMain.m_scrollVBar.getViewport();
         Rectangle viewRect = viewport.getViewRect();
         int nFirst = m_LogFilterMain.m_tbLogTable.rowAtPoint(new Point(0, viewRect.y));
         int nLast = m_LogFilterMain.m_tbLogTable.rowAtPoint(new Point(0, viewRect.height - 1));
@@ -388,7 +361,7 @@ public class LogTable extends JTable implements FocusListener, ActionListener
     {
         return m_fFontSize;
     }
-    
+
     public int getColumnWidth(int nColumn)
     {
         return getColumnModel().getColumn(nColumn).getWidth();
@@ -660,7 +633,7 @@ public class LogTable extends JTable implements FocusListener, ActionListener
     @Override
     public void actionPerformed( ActionEvent arg0 )
     {
-        Clipboard system = Toolkit.getDefaultToolkit().getSystemClipboard();;
+        Clipboard system = Toolkit.getDefaultToolkit().getSystemClipboard();
         StringBuffer sbf = new StringBuffer();
         int numrows = getSelectedRowCount();
         int[] rowsselected = getSelectedRows();
@@ -700,7 +673,7 @@ public class LogTable extends JTable implements FocusListener, ActionListener
         system = Toolkit.getDefaultToolkit().getSystemClipboard();
         system.setContents(stsel,stsel);
     }
-    
+
     public void setTagLength(int nLength)
     {
         if(m_nTagLength < nLength)

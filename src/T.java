@@ -5,7 +5,7 @@ import java.util.Date;
 ***************************************************************************
 **          WiseStone Co. Ltd. CONFIDENTIAL AND PROPRIETARY
 **        This source is the sole property of WiseStone Co. Ltd.
-**      Reproduction or utilization of this source in whole or in part 
+**      Reproduction or utilization of this source in whole or in part
 **    is forbidden without the written consent of WiseStone Co. Ltd.
 ***************************************************************************
 **                 Copyright (c) 2007 WiseStone Co. Ltd.
@@ -34,10 +34,10 @@ public class T
         {
             Exception e = new Exception();
             StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
+            System.out.println(getCurrentTime() +
                    POSTFIX + "[" +
                    callerElement.getFileName() + ":" +
-                   callerElement.getMethodName() + ":" + 
+                    callerElement.getMethodName() + ":" +
                    callerElement.getLineNumber() + "]");
         }
     }
@@ -48,10 +48,10 @@ public class T
         {
             Exception e = new Exception();
             StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
+            System.out.println(getCurrentTime() +
                    POSTFIX + "[" +
                    callerElement.getFileName() + ":" +
-                   callerElement.getMethodName() + ":" + 
+                    callerElement.getMethodName() + ":" +
                    callerElement.getLineNumber() + "]" +
                    strMsg );
         }
@@ -63,10 +63,10 @@ public class T
         {
             Exception e = new Exception();
             StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
+            System.out.println(getCurrentTime() +
                    POSTFIX + "[" +
                    callerElement.getFileName() + ":" +
-                   callerElement.getMethodName() + ":" + 
+                    callerElement.getMethodName() + ":" +
                    callerElement.getLineNumber() + "]");
         }
     }
@@ -77,12 +77,12 @@ public class T
 		{
 			Exception e = new Exception();
 			StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
-				   POSTFIX + "[" +
-				   callerElement.getFileName() + ":" +
-				   callerElement.getMethodName() + ":" + 
-				   callerElement.getLineNumber() + "]" +
-				   strMsg );
+            System.out.println(getCurrentTime() +
+                    POSTFIX + "[" +
+                    callerElement.getFileName() + ":" +
+                    callerElement.getMethodName() + ":" +
+                    callerElement.getLineNumber() + "]" +
+                    strMsg );
 		}
 	}
 
@@ -92,12 +92,12 @@ public class T
 		{
 			Exception e = new Exception();
 			StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
-				   POSTFIX + "[" +
-				   callerElement.getFileName() + ":" +
-				   callerElement.getMethodName() + ":" + 
-				   callerElement.getLineNumber() + "]");
-		}
+            System.out.println(getCurrentTime() +
+                    POSTFIX + "[" +
+                    callerElement.getFileName() + ":" +
+                    callerElement.getMethodName() + ":" +
+                    callerElement.getLineNumber() + "]");
+        }
 	}
 
     public static void i( Object strMsg )
@@ -106,10 +106,10 @@ public class T
         {
             Exception e = new Exception();
             StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
+            System.out.println(getCurrentTime() +
                    POSTFIX + "[" +
                    callerElement.getFileName() + ":" +
-                   callerElement.getMethodName() + ":" + 
+                    callerElement.getMethodName() + ":" +
                    callerElement.getLineNumber() + "]" +
                    strMsg );
         }
@@ -121,12 +121,12 @@ public class T
 		{
 			Exception e = new Exception();
 			StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
-				   POSTFIX + "[" +
-				   callerElement.getFileName() + ":" +
-				   callerElement.getMethodName() + ":" + 
-				   callerElement.getLineNumber() + "]");
-		}
+            System.out.println(getCurrentTime() +
+                    POSTFIX + "[" +
+                    callerElement.getFileName() + ":" +
+                    callerElement.getMethodName() + ":" +
+                    callerElement.getLineNumber() + "]");
+        }
 	}
 
     public static void d( Object strMsg )
@@ -135,18 +135,18 @@ public class T
         {
             Exception e = new Exception();
             StackTraceElement callerElement = e.getStackTrace()[1];
-            System.out.println( getCurrentTime() + 
+            System.out.println(getCurrentTime() +
                    POSTFIX + "[" +
                    callerElement.getFileName() + ":" +
-                   callerElement.getMethodName() + ":" + 
+                    callerElement.getMethodName() + ":" +
                    callerElement.getLineNumber() + "]" +
                    strMsg );
         }
     }
-    
+
     public static String getCurrentTime()
     {
-        long time = System.currentTimeMillis(); 
+        long time = System.currentTimeMillis();
 
         SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss.SSS");
 

@@ -1,3 +1,7 @@
+package logfilter.data
+
+import logfilter.model.LogFilterTableModel
+import logfilter.util.T
 import java.awt.Color
 
 class LogInfo {

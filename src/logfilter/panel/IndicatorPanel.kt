@@ -1,3 +1,8 @@
+package logfilter.panel
+
+import logfilter.INotiEvent
+import logfilter.LogFilterMain
+import logfilter.data.LogInfo
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Point

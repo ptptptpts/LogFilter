@@ -1,3 +1,7 @@
+package logfilter.parser
+
+import logfilter.data.LogColor
+import logfilter.data.LogInfo
 import java.awt.Color
 import java.util.*
 

@@ -1,3 +1,5 @@
+package logfilter.panel
+
 import javax.swing.JPanel
 
 class DevicesPanel : JPanel() {

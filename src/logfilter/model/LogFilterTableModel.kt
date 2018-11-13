@@ -1,3 +1,7 @@
+package logfilter.model
+
+import logfilter.data.LogInfo
+import logfilter.util.T
 import java.util.*
 import javax.swing.table.AbstractTableModel
 
@@ -33,15 +37,15 @@ class LogFilterTableModel : AbstractTableModel() {
     }
 
     companion object {
-        internal val COMUMN_LINE = 0
-        internal val COMUMN_DATE = 1
-        internal val COMUMN_TIME = 2
-        internal val COMUMN_LOGLV = 3
-        internal val COMUMN_PID = 4
-        internal val COMUMN_THREAD = 5
-        internal val COMUMN_TAG = 6
-        internal val COMUMN_BOOKMARK = 7
-        internal val COMUMN_MESSAGE = 8
+        val COMUMN_LINE = 0
+        val COMUMN_DATE = 1
+        val COMUMN_TIME = 2
+        val COMUMN_LOGLV = 3
+        val COMUMN_PID = 4
+        val COMUMN_THREAD = 5
+        val COMUMN_TAG = 6
+        val COMUMN_BOOKMARK = 7
+        val COMUMN_MESSAGE = 8
         val COMUMN_MAX = 9
 
         private val serialVersionUID = 1L

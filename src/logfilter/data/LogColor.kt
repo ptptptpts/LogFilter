@@ -1,3 +1,5 @@
+package logfilter.data
+
 object LogColor {
     //aarrggbb
     var COLOR_GUIDE = 0x00000000

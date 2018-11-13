@@ -1,3 +1,6 @@
+package logfilter.model
+
+import logfilter.data.TagInfo
 import java.util.*
 import javax.swing.table.AbstractTableModel
 

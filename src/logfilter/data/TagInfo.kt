@@ -1,3 +1,5 @@
+package logfilter.data
+
 class TagInfo {
 
     internal var m_strTag: String? = null

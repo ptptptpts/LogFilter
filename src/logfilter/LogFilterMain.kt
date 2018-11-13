@@ -1,3 +1,15 @@
+package logfilter
+
+import logfilter.data.LogColor
+import logfilter.data.LogInfo
+import logfilter.data.LogTable
+import logfilter.data.TagInfo
+import logfilter.menu.RecentFileMenu
+import logfilter.model.LogFilterTableModel
+import logfilter.panel.IndicatorPanel
+import logfilter.parser.ILogParser
+import logfilter.parser.LogCatParser
+import logfilter.util.T
 import java.awt.*
 import java.awt.datatransfer.DataFlavor
 import java.awt.dnd.*
@@ -42,11 +54,11 @@ class LogFilterMain : JFrame(), INotiEvent {
     internal lateinit var m_hmErrorFiltered: HashMap<Int, Int>
     internal lateinit var m_iLogParser: ILogParser
     internal lateinit var m_tbLogTable: LogTable
-    //    TagTable                    m_tbTagTable;
+    //    logfilter.data.TagTable                    m_tbTagTable;
     internal lateinit var m_scrollVBar: JScrollPane
     //    JScrollPane                 m_scrollVTagBar;
     internal lateinit var m_tmLogTableModel: LogFilterTableModel
-    //    TagFilterTableModel         m_tmTagTableModel;
+    //    logfilter.model.TagFilterTableModel         m_tmTagTableModel;
     internal var m_bUserFilter: Boolean = false
 
     //Word Filter, tag filter
@@ -181,9 +193,9 @@ class LogFilterMain : JFrame(), INotiEvent {
     internal val INI_COMUMN = "INI_COMUMN_"
 
     internal//        //iookill
-    //        m_tmTagTableModel = new TagFilterTableModel();
+    //        m_tmTagTableModel = new logfilter.model.TagFilterTableModel();
     //        m_tmTagTableModel.setData(m_arTagInfo);
-    //        m_tbTagTable = new TagTable(m_tmTagTableModel, this);
+    //        m_tbTagTable = new logfilter.data.TagTable(m_tmTagTableModel, this);
     //
     //        m_scrollVTagBar = new JScrollPane(m_tbTagTable);
     //        m_scrollVTagBar.setPreferredSize(new Dimension(182,50));
@@ -995,12 +1007,12 @@ class LogFilterMain : JFrame(), INotiEvent {
     }
 
     internal fun addTagList(strTag: String) {
-        //        for(TagInfo tagInfo : m_arTagInfo)
+        //        for(logfilter.data.TagInfo tagInfo : m_arTagInfo)
         //            if(tagInfo.m_strTag.equals(strTag))
         //                return;
         //        String strRemoveFilter = m_tbLogTable.GetFilterRemoveTag();
         //        String strShowFilter = m_tbLogTable.GetFilterShowTag();
-        //        TagInfo tagInfo = new TagInfo();
+        //        logfilter.data.TagInfo tagInfo = new logfilter.data.TagInfo();
         //        tagInfo.m_strTag = strTag;
         //        if(strRemoveFilter.contains(strTag))
         //            tagInfo.m_bRemove = true;
@@ -1323,7 +1335,7 @@ class LogFilterMain : JFrame(), INotiEvent {
         //        if(strSelectedDevice != null)
         //        {
         //            strSelectedDevice = strSelectedDevice.replace("\t", " ").replace("device", "").replace("offline", "");
-        //            T.d("strSelectedDevice = " + strSelectedDevice);
+        //            logfilter.util.T.d("strSelectedDevice = " + strSelectedDevice);
         //        }
 
         if (nType == DEVICES_ANDROID) {
@@ -1502,7 +1514,7 @@ class LogFilterMain : JFrame(), INotiEvent {
                             if (nIndex % 10000 == 0)
                                 Thread.sleep(1)
                             if (m_nChangedFilter == STATUS_CHANGE) {
-                                //                                    T.d("m_nChangedFilter == STATUS_CHANGE");
+                                //                                    logfilter.util.T.d("m_nChangedFilter == STATUS_CHANGE");
                                 break
                             }
                             logInfo = m_arLogInfoAll[nIndex]
@@ -1588,7 +1600,7 @@ class LogFilterMain : JFrame(), INotiEvent {
                     }
                 } while (true)
                 fileOut.close()
-                //                    T.d("Exit Code: " + m_Process.exitValue());
+                //                    logfilter.util.T.d("Exit Code: " + m_Process.exitValue());
             } catch (e: Exception) {
                 T.e("e = $e")
             }
@@ -1743,7 +1755,7 @@ class LogFilterMain : JFrame(), INotiEvent {
         //        {
         //            File file = fc.getSelectedFile();
         //            m_strLastDir = fc.getCurrentDirectory().getAbsolutePath();
-        //            T.d("file = " + file.getAbsolutePath());
+        //            logfilter.util.T.d("file = " + file.getAbsolutePath());
         //            parseFile(file);
         //            m_recentMenu.addEntry( file.getAbsolutePath() );
         //        }
@@ -1775,7 +1787,7 @@ class LogFilterMain : JFrame(), INotiEvent {
 
             val mainFrame = LogFilterMain()
             mainFrame.title = "$LOGFILTER $VERSION"
-            //        mainFrame.addWindowListener(new WindowEventHandler());
+            //        mainFrame.addWindowListener(new logfilter.handler.WindowEventHandler());
 
             val menubar = JMenuBar()
             val file = JMenu("File")

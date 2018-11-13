@@ -1,3 +1,9 @@
+package logfilter.data
+
+import logfilter.LogFilterMain
+import logfilter.model.LogFilterTableModel
+import logfilter.model.TagFilterTableModel
+import logfilter.util.T
 import java.awt.Component
 import java.awt.Dimension
 import java.awt.Rectangle
@@ -97,7 +103,7 @@ class TagTable(tablemodel: TagFilterTableModel, internal var m_LogFilterMain: Lo
         //
         //        if(nLast < 0)
         //            nLast = m_LogFilterMain.m_tbTagTable.getRowCount();
-        // Get maximum width of column data
+        // Get maximum width of column logfilter.data
         //        for (int r=nFirst; r<nFirst + nLast; r++) {
         //            renderer = getCellRenderer(r, vColIndex);
         //            comp = renderer.getTableCellRendererComponent(

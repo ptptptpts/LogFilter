@@ -1,3 +1,10 @@
+package logfilter.data
+
+import logfilter.INotiEvent
+import logfilter.LogFilterMain
+import logfilter.model.LogFilterTableModel
+import logfilter.parser.ILogParser
+import logfilter.util.T
 import java.awt.*
 import java.awt.datatransfer.Clipboard
 import java.awt.datatransfer.StringSelection
@@ -266,7 +273,7 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
                         gotoNextBookmark()
                     return true
                 }
-                KeyEvent.VK_F -> if (e.id == KeyEvent.KEY_PRESSED && e.modifiers and InputEvent.CTRL_DOWN_MASK == InputEvent.CTRL_DOWN_MASK) {
+                KeyEvent.VK_F -> if (e.id == KeyEvent.KEY_PRESSED && e.modifiersEx and InputEvent.CTRL_DOWN_MASK == InputEvent.CTRL_DOWN_MASK) {
                     m_LogFilterMain.setFindFocus()
                     return true
                 }
@@ -302,7 +309,7 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
 
         if (nLast < 0)
             nLast = m_LogFilterMain.m_tbLogTable.rowCount
-        // Get maximum width of column data
+        // Get maximum width of column logfilter.data
         for (r in nFirst until nFirst + nLast) {
             renderer = getCellRenderer(r, vColIndex)
             comp = renderer!!.getTableCellRendererComponent(
@@ -338,7 +345,7 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
             showColumn(iIndex, true)
         }
         showColumn(LogFilterTableModel.COMUMN_BOOKMARK, false)
-        //        showColumn(LogFilterTableModel.COMUMN_THREAD, false);
+        //        showColumn(logfilter.model.LogFilterTableModel.COMUMN_THREAD, false);
     }
 
     internal fun setFilterFind(strFind: String) {

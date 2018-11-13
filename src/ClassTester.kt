@@ -8,12 +8,12 @@ import java.util.*
 object ClassTester {
     fun functionTest(cls: Class<*>, strMethod: String, vararg params: Any) {
         try {
-            var method: Method? = null
+            var method: Method?
 
             //테스트 값을 받은경우
             if (params.size > 0) {
                 method = getMethod(cls, strMethod)
-                method?.invoke(cls.newInstance(), *params)
+                method?.invoke(cls.getDeclaredConstructor().newInstance(), *params)
             } else {
                 method = getMethod(cls, strMethod)
                 val arParams = method!!.parameterTypes
@@ -28,7 +28,7 @@ object ClassTester {
                         exeDefaultType(cls, method, param, iIndex, arValues)
                     } else {
                         disply(method, arValues, "user param")
-                        val result = method.invoke(cls.newInstance(), *arValues)
+                        val result = method.invoke(cls.getDeclaredConstructor().newInstance(), *arValues)
                         print("result = $result")
                         print("\n")
                     }
@@ -65,7 +65,7 @@ object ClassTester {
             for (iIndex in checkMethod.indices) {
                 arValues[iPosition] = checkMethod[iIndex].invoke(checkType)
                 disply(method, arValues, checkMethod[iIndex].name)
-                val result = method.invoke(cls.newInstance(), *arValues)
+                val result = method.invoke(cls.getDeclaredConstructor().newInstance(), *arValues)
                 print("result = $result")
                 print("\n")
             }
@@ -82,10 +82,10 @@ object ClassTester {
     }
 
     fun getDefaultValue(cls: Class<*>): Any? {
-        var param: Any? = null
+        var param: Any?
         try {
             param = createParam(cls)
-            return (param as? ICheckValue)?.middleValue ?: cls.newInstance()
+            return (param as? ICheckValue)?.middleValue ?: cls.getDeclaredConstructor().newInstance()
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
         } catch (e: InstantiationException) {

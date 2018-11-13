@@ -1,4 +1,5 @@
 import java.awt.*
+import java.awt.datatransfer.Clipboard
 import java.awt.datatransfer.StringSelection
 import java.awt.event.*
 import java.util.*
@@ -44,22 +45,21 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
     }
 
     override fun changeSelection(rowIndex: Int, columnIndex: Int, toggle: Boolean, extend: Boolean) {
-        var rowIndex = rowIndex
-        if (rowIndex < 0) rowIndex = 0
-        if (rowIndex > rowCount - 1) rowIndex = rowCount - 1
-        super.changeSelection(rowIndex, columnIndex, toggle, extend)
-        //        if(getAutoscrolls())
-        showRow(rowIndex)
+        var row = rowIndex
+        if (row < 0) row = 0
+        if (row > rowCount - 1) row = rowCount - 1
+        super.changeSelection(row, columnIndex, toggle, extend)
+        showRow(row)
     }
 
     fun changeSelection(rowIndex: Int, columnIndex: Int, toggle: Boolean, extend: Boolean, bMove: Boolean) {
-        var rowIndex = rowIndex
-        if (rowIndex < 0) rowIndex = 0
-        if (rowIndex > rowCount - 1) rowIndex = rowCount - 1
-        super.changeSelection(rowIndex, columnIndex, toggle, extend)
+        var row = rowIndex
+        if (row < 0) row = 0
+        if (row > rowCount - 1) row = rowCount - 1
+        super.changeSelection(row, columnIndex, toggle, extend)
         //        if(getAutoscrolls())
         if (bMove)
-            showRow(rowIndex)
+            showRow(row)
     }
 
     private fun init() {
@@ -266,7 +266,7 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
                         gotoNextBookmark()
                     return true
                 }
-                KeyEvent.VK_F -> if (e.id == KeyEvent.KEY_PRESSED && e.modifiers and InputEvent.CTRL_MASK == InputEvent.CTRL_MASK) {
+                KeyEvent.VK_F -> if (e.id == KeyEvent.KEY_PRESSED && e.modifiers and InputEvent.CTRL_DOWN_MASK == InputEvent.CTRL_DOWN_MASK) {
                     m_LogFilterMain.setFindFocus()
                     return true
                 }
@@ -390,12 +390,12 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
         internal var m_bChanged: Boolean = false
 
         override fun getTableCellRendererComponent(table: JTable?,
-                                                   value: Any?,
+                                                   inputValue: Any?,
                                                    isSelected: Boolean,
                                                    hasFocus: Boolean,
                                                    row: Int,
                                                    column: Int): Component {
-            var value = value
+            var value = inputValue
             if (value != null)
                 value = remakeData(column, value as String)
             val c = super.getTableCellRendererComponent(table,
@@ -418,8 +418,8 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
             return c
         }
 
-        internal fun remakeData(nIndex: Int, strText: String): String {
-            var strText = strText
+        internal fun remakeData(nIndex: Int, inputText: String): String {
+            var strText = inputText
             if (nIndex != LogFilterTableModel.COMUMN_MESSAGE && nIndex != LogFilterTableModel.COMUMN_TAG) return strText
 
             val strFind = if (nIndex == LogFilterTableModel.COMUMN_MESSAGE) GetFilterFind() else GetFilterShowTag()
@@ -437,9 +437,9 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
             return strText.replace("\t", "    ")
         }
 
-        internal fun remakeFind(strText: String, strFind: String?, arColor: Array<String>?, bUseSpan: Boolean): String {
-            var strText = strText
-            var strFind = strFind
+        internal fun remakeFind(inputText: String, inputFind: String?, arColor: Array<String>?, bUseSpan: Boolean): String {
+            var strText = inputText
+            var strFind = inputFind
             if (strFind == null || strFind.length <= 0) return strText
 
             strFind = strFind.replace(" ", "\u00A0")
@@ -471,9 +471,9 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
             return strText
         }
 
-        internal fun remakeFind(strText: String, strFind: String?, strColor: String?, bUseSpan: Boolean): String {
-            var strText = strText
-            var strFind = strFind
+        internal fun remakeFind(inputText: String, inputFind: String?, strColor: String?, bUseSpan: Boolean): String {
+            var strText = inputText
+            var strFind = inputFind
             if (strFind == null || strFind.length <= 0) return strText
 
             strFind = strFind.replace(" ", "\u00A0")
@@ -502,8 +502,8 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
         }
     }
 
-    fun showRow(row: Int) {
-        var row = row
+    fun showRow(inputRow: Int) {
+        var row = inputRow
         if (row < 0) row = 0
         if (row > rowCount - 1) row = rowCount - 1
 
@@ -519,7 +519,7 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
         val nLastSelectedIndex = selectedRow
 
         changeSelection(row, 0, false, false)
-        var nVisible = row
+        var nVisible: Int
         if (nLastSelectedIndex <= row || nLastSelectedIndex == -1)
             nVisible = row + visibleRowCount / 2
         else
@@ -556,7 +556,7 @@ class LogTable(tablemodel: LogFilterTableModel, internal var m_LogFilterMain: Lo
     }
 
     override fun actionPerformed(arg0: ActionEvent) {
-        var system = Toolkit.getDefaultToolkit().systemClipboard
+        var system: Clipboard
         val sbf = StringBuffer()
         val numrows = selectedRowCount
         val rowsselected = selectedRows

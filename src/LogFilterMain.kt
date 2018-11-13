@@ -1194,7 +1194,7 @@ class LogFilterMain : JFrame(), INotiEvent {
     internal fun setDeviceList() {
         m_strSelectedDevice = ""
 
-        val listModel = m_lDeviceList.model as DefaultListModel<String>
+        val listModel = m_lDeviceList.model as DefaultListModel<String?>
         try {
             listModel.clear()
             var s: String
@@ -1384,7 +1384,7 @@ class LogFilterMain : JFrame(), INotiEvent {
                 var bEndLine: Boolean
                 var nSelectedIndex: Int
                 var nAddCount: Int
-                var nPreRowCount = 0
+                var nPreRowCount: Int
                 var nEndLine: Int
 
                 while (true) {
@@ -1406,7 +1406,7 @@ class LogFilterMain : JFrame(), INotiEvent {
                         var nLine = m_arLogInfoAll.size + 1
                         var strLine = br.readLine()
                         while (!m_bPauseADB && (strLine) != null) {
-                            if (strLine != null && "" != strLine.trim { it <= ' ' }) {
+                            if ("" != strLine.trim { it <= ' ' }) {
                                 val logInfo = m_iLogParser.parseLog(strLine)
                                 logInfo.m_strLine = "" + nLine++
                                 addLogInfo(logInfo)
